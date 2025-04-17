@@ -21,10 +21,10 @@ Cypress.Commands.add('registerClub', () => {
   // Geração de dados dinâmica
   const CNPJ = generateCNPJ();
   const clubName = faker.company.name();
-  const clubSigla = generateAcronym(clubName, 1);
-  const email = faker.internet.email();
+  const siglaClub = generateAcronym(clubName, 1);
+  const emailClub = faker.internet.email();
   const date = generateRandomDate();
-  const phone = faker.phone.number('(##) #####-####').replace(/\s*x\d+/g, '');
+  const phoneClub = faker.phone.number('(##) #####-####').replace(/\s*x\d+/g, '');
   const cep = fakerBR.address.zipCode('#####-###');
   const address = fakerBR.address.streetAddress();
   const number = faker.number.int({ max: 999 });
@@ -39,11 +39,14 @@ Cypress.Commands.add('registerClub', () => {
   registerPage.clickAcceptTermsButton();
   registerPage.fieldCNPJClub(CNPJ);
   registerPage.clickButtonSearchCNPJ();
-  registerPage.fieldName(clubName);
-  registerPage.fieldAcronym(clubSigla);
-  registerPage.fieldEmail(email);
-  registerPage.fieldDateFoundation(date);
-  registerPage.fielPhone(phone);
+
+  registerPage.fillInClubDataFields(
+    clubName,
+    siglaClub,
+    emailClub,
+    date,
+    phoneClub
+  )
 
   // Dados de Endereço
   registerPage.fielCep(cep);

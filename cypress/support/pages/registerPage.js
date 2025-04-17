@@ -22,6 +22,29 @@ export default {
     }
   },
 
+  fillInClubDataFields(nameClub, siglaClub, emailClub, dateFoundation, phoneClub) {
+    if (nameClub !== null) {
+      waitElement(el.fieldNameClub)
+      set(el.fieldNameClub, nameClub)
+    }
+    if (siglaClub !== null) {
+      waitElement(el.fieldSigla)
+      set(el.fieldSigla, siglaClub)
+    }
+    if (emailClub !== null) {
+      waitElement(el.fieldEmail)
+      set(el.fieldEmail, emailClub)
+    }
+    if (dateFoundation !== null) {
+      waitElement(el.fieldFoundationDate)
+      set(el.fieldFoundationDate, dateFoundation)
+    }
+    if (phoneClub !== null) {
+      waitElement(el.fieldPhone)
+      set(el.fieldPhone, phoneClub)
+    }
+  },
+
   clickButtonSearchCNPJ() {
     waitElement(el.searchPresidentButton)
     click(el.searchCNPJButton)
@@ -29,18 +52,7 @@ export default {
     click(el.btnConfirmModal)
   },
 
-  fieldName(name) {
-    click(el.fieldNameClub)
-    if (name !== null) {
-      set(el.fieldNameClub, name)
-    }
-  },
 
-  fieldAcronym(sigla) {
-    if (sigla !== null) {
-      set(el.fieldSigla, sigla)
-    }
-  },
 
   fieldEmail(email) {
     click(el.fieldEmail)
@@ -49,19 +61,9 @@ export default {
     }
   },
 
-  fieldDateFoundation(date) {
-    click(el.fieldFoundationDate)
-    if (date !== null) {
-      set(el.fieldFoundationDate, date)
-    }
-  },
 
-  fielPhone(phone) {
-    click(el.fieldPhone)
-    if (phone !== null) {
-      set(el.fieldPhone, phone)
-    }
-  },
+
+
 
   fielCep(cep) {
     click(el.fieldCEP)
