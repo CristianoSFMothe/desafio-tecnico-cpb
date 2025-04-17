@@ -28,12 +28,28 @@ function loadPage(url) {
 function set(el, text) {
   waitElement(el)
   try {
-    cy.get(el).type(text)
+    cy.get(el)
+      .clear({ force: true })
+      .type(text, { force: true })
   } catch (error) {
     cy.log('Exception caught: ' + error.message);
   }
   return set;
 }
+
+function pressEnter(el, text) {
+  waitElement(el);
+  try {
+    cy.get(el)
+      .should('be.visible')
+      .type(`${text}{enter}`, { force: true });
+  } catch (error) {
+    cy.log('Exception caught: ' + error.message);
+  }
+  return pressEnter;
+}
+
+// cy.get(el.selectState).should('be.visible').type(`${state}{enter}`)
 
 function set_Index(el, text, index) {
   waitElement(el)
@@ -213,5 +229,5 @@ module.exports = {
   set, click, clickRemoveTarget, waitElement, waitElement_index, click_index,
   clear, get_text, scrollTo, get_text_index, replaceIN, splitIn,
   click_text, loadPage, set_Index, clickForce, click_indexForce, clear_index,
-  get_texts
+  get_texts, pressEnter
 };
