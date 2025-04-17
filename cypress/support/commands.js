@@ -7,66 +7,33 @@ Cypress.Commands.add('login', () => {
   login.clickButton()
 });
 
-Cypress.Commands.add('accessPageCreateAccount', () => {
+Cypress.Commands.add('fillInClubDetails', (CNPJ, clubName, sigla, email, date, phone) => {
   registerPage.validateRegisterPage()
   registerPage.clickAcceptTermsButton()
-});
-
-Cypress.Commands.add('fillCnpjFieldAndClickSearchButton', (CNPJ) => {
   registerPage.fieldCNPJClub(CNPJ)
   registerPage.clickButtonSearchCNPJ()
-});
-
-Cypress.Commands.add('fillFieldName', (clubName) => {
   registerPage.fieldName(clubName)
-});
-
-Cypress.Commands.add('fillFieldAcronym', (sigla) => {
   registerPage.fieldAcronym(sigla)
-});
-
-Cypress.Commands.add('fillFieldEmail', (email) => {
   registerPage.fieldEmail(email)
-});
-
-Cypress.Commands.add('fillFieldDateFoundation', (date) => {
   registerPage.fieldDateFoundation(date)
-});
-
-Cypress.Commands.add('fillFieldPhone', (phone) => {
   registerPage.fielPhone(phone)
 });
 
-Cypress.Commands.add('fillFieldCEP', (cep) => {
+
+
+Cypress.Commands.add('fillAddress', (cep, address, number, neighborhood, state, city) => {
   registerPage.fielCep(cep)
-});
-
-Cypress.Commands.add('fillFieldAddress', (address) => {
   registerPage.fielAddress(address)
-});
-
-Cypress.Commands.add('fillFieldAddressNumber', (number) => {
   registerPage.fielAddressNumber(number)
-});
-
-Cypress.Commands.add('fillFieldNeighborhood', (neighborhood) => {
   registerPage.fielNeighborhood(neighborhood)
-});
-
-Cypress.Commands.add('selectStateRioDeJaneiro', (state) => {
   registerPage.selectState(state)
-});
-
-Cypress.Commands.add('selectCityRioDeJaneiro', (city) => {
   registerPage.selectCity(city)
 });
 
-Cypress.Commands.add('fillFieldCPF', (cpf) => {
+
+Cypress.Commands.add('fillFieldsPresident', (cpf, name, email, dateStar, dateElection, dateEnd) => {
   registerPage.fieldCpf(cpf)
   registerPage.clickButtonSearchCPF()
-});
-
-Cypress.Commands.add('fillFieldsPresident', (name, email, dateStar, dateElection, dateEnd) => {
   registerPage.fieldNamePresident(name)
   registerPage.fieldEmail(email)
   registerPage.fieldDateStartPresident(dateStar)
@@ -83,5 +50,5 @@ Cypress.Commands.add('fillFieldsDirector', (cpf, name) => {
 
 Cypress.Commands.add('markModality', () => {
   registerPage.modality()
-  registerPage.saveDataClub()
+  // registerPage.saveDataClub()
 });

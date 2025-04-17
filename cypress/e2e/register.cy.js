@@ -27,21 +27,17 @@ describe('Acessar a página de registro de clubes', () => {
     cy.login()
   })
   it('Deve registar um clube com sucesso', () => {
-    cy.accessPageCreateAccount()
-    cy.fillCnpjFieldAndClickSearchButton(CNPJ)
-    cy.fillFieldName(clubName)
-    cy.fillFieldAcronym(clubSigla)
-    cy.fillFieldEmail(email)
-    cy.fillFieldDateFoundation(date)
-    cy.fillFieldPhone(phone)
-    cy.fillFieldCEP(cep)
-    cy.fillFieldAddressNumber(number)
-    cy.fillFieldAddress(address)
-    cy.fillFieldNeighborhood('centro')
-    cy.selectStateRioDeJaneiro('Rio de Janeiro')
-    cy.selectCityRioDeJaneiro('Rio de Janeiro')
-    cy.fillFieldCPF(cpf)
-    cy.fillFieldsPresident(name, emailPresident, date, date, date)
+    // DADOS DO CLUBE
+    cy.fillInClubDetails(CNPJ, clubName, clubSigla, email, date, phone)
+
+
+    // DADOS DO ENDEREÇO    
+    cy.fillAddress(cep, number, address, 'Centro', 'Rio de Janeiro', 'Rio de Janeiro')
+
+    // DADOS DA PRESIDÊNCIA
+    cy.fillFieldsPresident(cpf, name, emailPresident, date, date, date)
+
+    // DADOS DO DIRETOR
     cy.fillFieldsDirector(cpfDirector, nameDirector)
     cy.markModality()
   })
