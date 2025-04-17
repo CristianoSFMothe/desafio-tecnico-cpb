@@ -1,23 +1,33 @@
 name: End-to-end tests
+
 on: push
+
 jobs:
   cypress-run:
     runs-on: ubuntu-22.04
+
     steps:
       - name: Copying the Project
         uses: actions/checkout@v4
 
-      - name: Running Cypress Tests
-        uses: cypress-io/github-action@v6
+      - name: Install Dependencies
+        run: npm ci
 
-      - name: Uploading files in case of failure
-        uses: actions/upload-artifact@v4
+      - name: Run Cypress Tests in Cloud
+        run: npm run test:cloud
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+
+      - name: Upload screenshots on failure
         if: failure()
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-screenshots
           path: cypress/screenshots
           if-no-files-found: ignore
-      - name: Upload files if successful
+
+      - name: Upload videos if successful
+        if: success()
         uses: actions/upload-artifact@v4
         with:
           name: cypress-videos
