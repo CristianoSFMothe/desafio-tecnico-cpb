@@ -45,20 +45,27 @@ function set_Index(el, text, index) {
   return set_Index;
 }
 
-function click(el) {
+function click(el, text = null) {
   waitElement(el)
   try {
-    cy.get(el).click();
+    if (text) {
+      cy.get(el).contains(text).click()
+    } else {
+      cy.get(el).click()
+    }
   } catch (error) {
-    cy.log('Exception caught: ' + error.message);
+    cy.log('Exception caught: ' + error.message)
   }
-  return click;
+  return click
 }
+
 
 function clickRemoveTarget(el) {
   waitElement(el)
   try {
-    cy.get(el).invoke('removeAttr', 'target').click();
+    cy.get(el)
+      .invoke('removeAttr', 'target')
+      .click({ force: true }).visit('https://homolognovocadastro.cpb.org.br/public/clubes-externos');
   } catch (error) {
     cy.log('Exception caught: ' + error.message);
   }

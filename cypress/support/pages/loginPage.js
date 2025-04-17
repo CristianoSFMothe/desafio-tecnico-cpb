@@ -12,6 +12,7 @@ export default {
 
   clickButton() {
     waitElement(el.btnRegister)
-    clickRemoveTarget(el.btnRegister)
+    // clickRemoveTarget(el.btnRegister)
+    loadPage('https://homolognovocadastro.cpb.org.br/public/clubes-externos')
   }
 }
