@@ -41,7 +41,8 @@ Cypress.Commands.add('registerClub', () => {
   registerPage.clickSearchAndConfirm(
     el.searchCNPJButton,
     el.titleModalInfo,
-    el.btnConfirmModal)
+    el.btnConfirmModal
+  )
 
   registerPage.fillInClubDataFields(
     clubName,
@@ -58,23 +59,32 @@ Cypress.Commands.add('registerClub', () => {
     number,
     'centro'
   )
-
   registerPage.selectState('Rio de Janeiro');
   registerPage.selectCity('Rio de Janeiro');
 
   // Presidente
-  registerPage.fieldCpf(cpf);
-  registerPage.clickButtonSearchCPF();
-  registerPage.fieldNamePresident(name);
-  registerPage.fieldEmail(emailPresident);
-  registerPage.fieldDateStartPresident(date);
-  registerPage.fieldDateElectionPresident(date);
-  registerPage.fieldDateEndPresident(date);
+  registerPage.fillCpfField(el.fielCpf, cpf);
+  registerPage.clickSearchAndConfirm(
+    el.searchPresidentButton,
+    el.titleModalInfo,
+    el.btnConfirmModal
+  )
+  registerPage.fillInPresidencyData(
+    name,
+    emailPresident,
+    date,
+    date,
+    date
+  )
 
   // Diretor
-  registerPage.fieldCpfDirector(cpfDirector);
-  registerPage.clickButtonSearchCPFDirector();
-  registerPage.fieldNameDirector(nameDirector);
+  registerPage.fillCpfField(el.fieldCpfDirector, cpfDirector);
+  registerPage.clickSearchAndConfirm(
+    el.searchDirectorButton,
+    el.titleModalInfo,
+    el.btnConfirmModal
+  )
+  registerPage.fillInDirectorData(nameDirector)
 
   // Modalidade
   registerPage.modality();
@@ -84,20 +94,23 @@ Cypress.Commands.add('registerClub', () => {
 });
 
 Cypress.Commands.add('emptyCNPJField', () => {
-  registerPage.validateRegisterPage();
-  waitElement(el.agreeButton)
-  click(el.agreeButton, el.agreeButtonText)
-  click(el.searchPresidentButton)
-  waitElement(el.titleModalInfo)
-  click(el.btnConfirmModal)
+  registerPage.validateRegisterPage('Informações para Cadastro de Clube');
+  registerPage.fieldCNPJClub(null);
+  registerPage.clickSearchAndConfirm(
+    el.searchCNPJButton,
+    el.titleModalInfo,
+    el.btnConfirmModal
+  )
 });
 
 Cypress.Commands.add('existingCNPJ', (CNPJ) => {
-  registerPage.validateRegisterPage();
-  waitElement(el.agreeButton)
-  click(el.agreeButton, el.agreeButtonText)
+  registerPage.validateRegisterPage('Informações para Cadastro de Clube');
   registerPage.fieldCNPJClub(CNPJ);
-  registerPage.clickButtonSearchCNPJ()
+  registerPage.clickSearchAndConfirm(
+    el.searchCNPJButton,
+    el.titleModalInfo,
+    el.btnConfirmModal
+  )
 });
 
 Cypress.Commands.add('invalidCNPJ', (CNPJ, text) => {

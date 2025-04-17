@@ -70,7 +70,7 @@ export default {
     }
     waitElement(el.fieldAddressNumber)
     if (number !== null) {
-      set(el.fieldAddress, number)
+      set(el.fieldAddressNumber, number)
     }
     waitElement(el.fieldNeighborhood)
     if (neighborhood !== null) {
@@ -88,64 +88,46 @@ export default {
     cy.get(el.selectCity).should('be.visible').type(`${city}{enter}`)
   },
 
-  fieldCpf(cpf) {
-    click(el.fielCpf)
+  fillCpfField(selector, cpf) {
+    waitElement(selector);
     if (cpf !== null) {
-      set(el.fielCpf, cpf)
+      set(selector, cpf);
     }
   },
 
-  clickButtonSearchCPF() {
-    waitElement(el.searchPresidentButton)
-    click(el.searchPresidentButton)
-    waitElement(el.titleModalInfo)
-    click(el.btnConfirmModal)
-  },
-
-  fieldNamePresident(name) {
-    click(el.fieldNamePresident)
+  fillInPresidencyData(name, email, dateStar, dateElection, dateEnd) {
+    waitElement(el.fieldNamePresident)
     if (name !== null) {
       set(el.fieldNamePresident, name)
     }
-  },
-
-  fieldEmailPresident(email) {
-    click(el.fieldEmailPresident)
+    waitElement(el.fieldEmailPresident)
     if (email !== null) {
       set(el.fieldEmailPresident, email)
     }
-  },
-
-  fieldDateStartPresident(dateStar) {
-    click(el.fieldDateStartTermPresident)
+    waitElement(el.fieldEmailPresident)
+    if (email !== null) {
+      set(el.fieldEmailPresident, email)
+    }
+    waitElement(el.fieldDateStartTermPresident)
     if (dateStar !== null) {
       set(el.fieldDateStartTermPresident, dateStar)
     }
-  },
-
-  fieldDateElectionPresident(dateElection) {
-    click(el.fieldPresidentialElectionDate)
+    waitElement(el.fieldDateStartTermPresident)
+    if (dateStar !== null) {
+      set(el.fieldDateStartTermPresident, dateStar)
+    }
+    waitElement(el.fieldPresidentialElectionDate)
     if (dateElection !== null) {
       set(el.fieldPresidentialElectionDate, dateElection)
     }
-  },
-
-  fieldDateEndPresident(dateEnd) {
-    click(el.fieldDateEndsPresidentMandate)
+    waitElement(el.fieldDateEndsPresidentMandate)
     if (dateEnd !== null) {
       set(el.fieldDateEndsPresidentMandate, dateEnd)
     }
   },
 
-  fieldCpfDirector(cpf) {
-    click(el.fieldCpfDirector)
-    if (cpf !== null) {
-      set(el.fieldCpfDirector, cpf)
-    }
-  },
-
-  fieldNameDirector(name) {
-    click(el.fieldNameDirector)
+  fillInDirectorData(name) {
+    waitElement(el.fieldNameDirector)
     if (name !== null) {
       set(el.fieldNameDirector, name)
     }
@@ -176,10 +158,7 @@ export default {
   },
 
   validateMessage(text) {
-    return get_text(el.invalidFeedback)
+    return get_text(el.invalidFeedback, text)
   },
-
-
-
 }
 
