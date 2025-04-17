@@ -5,6 +5,9 @@ const fakerBR = require('faker-br');
 const { generateCNPJ } = require("../support/utils/cnpj-generator.utils");
 const { generateAcronym } = require("../support/utils/generator-sigla.utils");
 const { generateRandomDate } = require("../support/utils/generate-random-date");
+const { waitElement, click } = require('./actions')
+
+let el = require('./elements/registarElements').registerPage
 
 faker.locale = 'pt_BR';
 
@@ -69,4 +72,13 @@ Cypress.Commands.add('registerClub', () => {
 
   // Salvar Clube
   registerPage.saveDataClub();
+});
+
+Cypress.Commands.add('emptyCNPJField', () => {
+  registerPage.validateRegisterPage();
+  waitElement(el.agreeButton)
+  click(el.agreeButton, el.agreeButtonText)
+  click(el.searchPresidentButton)
+  waitElement(el.titleModalInfo)
+  click(el.btnConfirmModal)
 });
