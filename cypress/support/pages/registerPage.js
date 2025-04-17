@@ -1,21 +1,21 @@
 let el = require('../elements/registarElements').registerPage
-const { loadPage, waitElement, click, set, get_text, fillField, get_text_index } = require('../actions')
+const { loadPage, waitElement, click, set, get_text, fillField, waitElementNotVisible } = require('../actions')
 
 export default {
   accessPage() {
     loadPage('/')
   },
 
-  validateRegisterPage() {
-    return waitElement(el.modalTitle)
-  },
-
-  clickAcceptTermsButton() {
+  validateRegisterPage(titleModal) {
+    waitElement(el.modalTitle)
     waitElement(el.agreeButton)
+    get_text(el.modalTitle, titleModal)
     click(el.agreeButton, el.agreeButtonText)
+    waitElementNotVisible(el.modalTitle)
   },
 
   fieldCNPJClub(CNPJ) {
+    waitElementNotVisible(el.modalTitle)
     waitElement(el.fieldCNPJ)
     if (CNPJ !== null) {
       set(el.fieldCNPJ, CNPJ)
@@ -45,14 +45,12 @@ export default {
     }
   },
 
-  clickButtonSearchCNPJ() {
-    waitElement(el.searchPresidentButton)
-    click(el.searchCNPJButton)
-    waitElement(el.titleModalInfo)
-    click(el.btnConfirmModal)
+  clickSearchAndConfirm(searchButton, modalTitle, confirmButton) {
+    waitElement(searchButton);
+    click(searchButton);
+    waitElement(modalTitle);
+    click(confirmButton);
   },
-
-
 
   fieldEmail(email) {
     click(el.fieldEmail)
@@ -61,33 +59,20 @@ export default {
     }
   },
 
-
-
-
-
-  fielCep(cep) {
-    click(el.fieldCEP)
+  fillInAddressFields(cep, address, number, neighborhood) {
+    waitElement(el.fieldCEP)
     if (cep !== null) {
       set(el.fieldCEP, cep)
     }
-  },
-
-  fielAddress(address) {
-    click(el.fieldAddress)
+    waitElement(el.fieldAddress)
     if (address !== null) {
       set(el.fieldAddress, address)
     }
-  },
-
-  fielAddressNumber(number) {
-    click(el.fieldAddressNumber)
+    waitElement(el.fieldAddressNumber)
     if (number !== null) {
-      set(el.fieldAddressNumber, number)
+      set(el.fieldAddress, number)
     }
-  },
-
-  fielNeighborhood(neighborhood) {
-    click(el.fieldNeighborhood)
+    waitElement(el.fieldNeighborhood)
     if (neighborhood !== null) {
       set(el.fieldNeighborhood, neighborhood)
     }

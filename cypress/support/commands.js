@@ -35,10 +35,13 @@ Cypress.Commands.add('registerClub', () => {
   const nameDirector = faker.person.fullName();
 
   // Dados do Clube
-  registerPage.validateRegisterPage();
-  registerPage.clickAcceptTermsButton();
+  registerPage.validateRegisterPage('Informações para Cadastro de Clube');
+
   registerPage.fieldCNPJClub(CNPJ);
-  registerPage.clickButtonSearchCNPJ();
+  registerPage.clickSearchAndConfirm(
+    el.searchCNPJButton,
+    el.titleModalInfo,
+    el.btnConfirmModal)
 
   registerPage.fillInClubDataFields(
     clubName,
@@ -49,10 +52,13 @@ Cypress.Commands.add('registerClub', () => {
   )
 
   // Dados de Endereço
-  registerPage.fielCep(cep);
-  registerPage.fielAddress(address);
-  registerPage.fielAddressNumber(number);
-  registerPage.fielNeighborhood('Centro');
+  registerPage.fillInAddressFields(
+    cep,
+    address,
+    number,
+    'centro'
+  )
+
   registerPage.selectState('Rio de Janeiro');
   registerPage.selectCity('Rio de Janeiro');
 

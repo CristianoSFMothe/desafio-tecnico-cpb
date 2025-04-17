@@ -7,6 +7,15 @@ function waitElement(el) {
   return waitElement;
 }
 
+function waitElementNotVisible(el) {
+  try {
+    cy.get(el).and('not.be.visible');
+  } catch (error) {
+    cy.log('Exception caught: ' + error.message);
+  }
+  return waitElement;
+}
+
 function waitElement_index(el, index) {
   try {
     cy.get(el).eq(index, { timeout: 10000 })
@@ -161,16 +170,25 @@ function clear_index(el, index) {
   return clear_index;
 }
 
-function get_text(el) {
-  waitElement(el)
-  let text
+function get_text(el, expectedText = null) {
+  waitElement(el);
+  let text;
+
   try {
-    text = cy.get(el).invoke('text');
+    const element = cy.get(el);
+
+    if (expectedText) {
+      element.contains(expectedText).should('be.visible');
+    }
+
+    text = element.invoke('text');
   } catch (error) {
     cy.log('Exception caught: ' + error.message);
   }
+
   return text;
 }
+
 
 function get_texts(el, index1, index2) {
   waitElement(el)
@@ -242,5 +260,5 @@ module.exports = {
   set, click, clickRemoveTarget, waitElement, waitElement_index, click_index,
   clear, get_text, scrollTo, get_text_index, replaceIN, splitIn,
   click_text, loadPage, set_Index, clickForce, click_indexForce, clear_index,
-  get_texts, pressEnter, fillField
+  get_texts, pressEnter, fillField, waitElementNotVisible
 };
