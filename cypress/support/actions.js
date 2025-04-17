@@ -75,6 +75,19 @@ function click(el, text = null) {
   return click
 }
 
+function fillField(el, text) {
+  waitElement(el);
+  try {
+    cy.get(el).click({ force: true });
+    if (text !== null && text !== undefined) {
+      cy.get(el).clear({ force: true }).type(text, { force: true });
+    }
+  } catch (error) {
+    cy.log('Exception caught: ' + error.message);
+  }
+  return fillField;
+}
+
 
 function clickRemoveTarget(el) {
   waitElement(el)
@@ -229,5 +242,5 @@ module.exports = {
   set, click, clickRemoveTarget, waitElement, waitElement_index, click_index,
   clear, get_text, scrollTo, get_text_index, replaceIN, splitIn,
   click_text, loadPage, set_Index, clickForce, click_indexForce, clear_index,
-  get_texts, pressEnter
+  get_texts, pressEnter, fillField
 };

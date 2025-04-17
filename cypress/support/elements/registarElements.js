@@ -31,4 +31,5 @@ export const registerPage = {
   fieldNameDirector: '#nomeDiretor',
   modality: '#modalidade-26',
   agreeSaveButton: 'button.btn.btn-sm.btn-primary.ml-10:contains("Salvar")',
+  invalidFeedback: '.invalid-feedback',
 }

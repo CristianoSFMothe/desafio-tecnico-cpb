@@ -1,5 +1,5 @@
 let el = require('../elements/registarElements').registerPage
-const { loadPage, waitElement, click, set, pressEnter } = require('../actions')
+const { loadPage, waitElement, click, set, get_text, fillField } = require('../actions')
 
 export default {
   accessPage() {
@@ -182,6 +182,13 @@ export default {
   saveDataClub() {
     waitElement(el.agreeSaveButton)
     click(el.agreeSaveButton)
+  },
+
+  invalidFieldCNPJ(CNPJ, text) {
+    fillField(el.fieldCNPJ, CNPJ);
+    // clickButtonSearchCNPJ()
+    // waitElement(el.invalidFeedback)
+    // 
   }
 
 }

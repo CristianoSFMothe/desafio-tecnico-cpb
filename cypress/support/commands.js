@@ -5,7 +5,7 @@ const fakerBR = require('faker-br');
 const { generateCNPJ } = require("../support/utils/cnpj-generator.utils");
 const { generateAcronym } = require("../support/utils/generator-sigla.utils");
 const { generateRandomDate } = require("../support/utils/generate-random-date");
-const { waitElement, click } = require('./actions')
+const { waitElement, click, get_text } = require('./actions')
 
 let el = require('./elements/registarElements').registerPage
 
@@ -81,4 +81,25 @@ Cypress.Commands.add('emptyCNPJField', () => {
   click(el.searchPresidentButton)
   waitElement(el.titleModalInfo)
   click(el.btnConfirmModal)
+});
+
+Cypress.Commands.add('existingCNPJ', (CNPJ) => {
+  registerPage.validateRegisterPage();
+  waitElement(el.agreeButton)
+  click(el.agreeButton, el.agreeButtonText)
+  registerPage.fieldCNPJClub(CNPJ);
+  registerPage.clickButtonSearchCNPJ()
+});
+
+Cypress.Commands.add('invalidCNPJ', (CNPJ, text) => {
+  registerPage.validateRegisterPage();
+  waitElement(el.agreeButton)
+  click(el.agreeButton, el.agreeButtonText)
+  registerPage.invalidFieldCNPJ(CNPJ, text)
+  click(el.searchPresidentButton)
+  waitElement(el.titleModalInfo)
+  click(el.btnConfirmModal)
+  waitElement(el.invalidFeedback)
+  get_text(text)
+
 });
