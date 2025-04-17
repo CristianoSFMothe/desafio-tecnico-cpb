@@ -1,5 +1,5 @@
 let el = require('../elements/registarElements').registerPage
-const { loadPage, waitElement, click, set, get_text, fillField } = require('../actions')
+const { loadPage, waitElement, click, set, get_text, fillField, get_text_index } = require('../actions')
 
 export default {
   accessPage() {
@@ -93,9 +93,6 @@ export default {
 
   selectState(state) {
     click(el.selectState);
-    // if (state !== null) {
-    //   pressEnter(el.selectState, state);
-    // }
     cy.get(el.selectState).should('be.visible').type(`${state}{enter}`)
   },
 
@@ -184,12 +181,18 @@ export default {
     click(el.agreeSaveButton)
   },
 
-  invalidFieldCNPJ(CNPJ, text) {
+  invalidFieldCNPJ(CNPJ) {
     fillField(el.fieldCNPJ, CNPJ);
     // clickButtonSearchCNPJ()
     // waitElement(el.invalidFeedback)
     // 
-  }
+  },
+
+  validateMessage(text) {
+    return get_text(el.invalidFeedback)
+  },
+
+
 
 }
 

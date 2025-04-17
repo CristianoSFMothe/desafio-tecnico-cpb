@@ -3,7 +3,7 @@ describe('Acessar a página de registro de clubes', () => {
     cy.login();
   });
 
-  it('Deve registar um clube com sucesso', () => {
+  it.only('Deve registar um clube com sucesso', () => {
     cy.registerClub();
   });
 

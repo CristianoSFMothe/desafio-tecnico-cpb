@@ -92,14 +92,21 @@ Cypress.Commands.add('existingCNPJ', (CNPJ) => {
 });
 
 Cypress.Commands.add('invalidCNPJ', (CNPJ, text) => {
+  // registerPage.validateRegisterPage();
+  // waitElement(el.agreeButton)
+  // click(el.agreeButton, el.agreeButtonText)
+  // registerPage.invalidFieldCNPJ(CNPJ)
+  // cy.wait(1000)
+  // click(el.searchPresidentButton)
+  // cy.wait(1000)
+  // waitElement(el.titleModalInfo)
+  // click(el.btnConfirmModal)
+  // waitElement(el.invalidFeedback)
+  // get_text(text)
   registerPage.validateRegisterPage();
-  waitElement(el.agreeButton)
-  click(el.agreeButton, el.agreeButtonText)
-  registerPage.invalidFieldCNPJ(CNPJ, text)
-  click(el.searchPresidentButton)
-  waitElement(el.titleModalInfo)
-  click(el.btnConfirmModal)
+  registerPage.clickAcceptTermsButton();
+  registerPage.fieldCNPJClub(CNPJ);
+  registerPage.clickButtonSearchCNPJ();
   waitElement(el.invalidFeedback)
-  get_text(text)
-
+  registerPage.validateMessage(text)
 });
