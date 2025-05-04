@@ -5,6 +5,8 @@
   "main": "index.js",
   "devDependencies": {
     "@faker-js/faker": "^9.7.0",
+    "@mmisty/cypress-allure-adapter": "^3.2.3",
+    "allure-commandline": "^2.34.0",
     "cpf-cnpj-validator": "^1.0.3",
     "cypress": "^12.2.0"
   },
@@ -13,7 +15,8 @@
     "cy:open:mobile": "cypress open --config viewportWidth=410,viewportHeight=860",
     "test": "cypress run",
     "test:mobile": "cypress run --config viewportWidth=410,viewportHeight=860",
-    "test:cloud": "cypress run --record"
+    "test:cloud": "cypress run --record",
+    "allure:serve": "npx allure serve"
   },
   "repository": {
     "type": "git",

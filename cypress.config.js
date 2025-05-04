@@ -1,4 +1,5 @@
 const { defineConfig } = require("cypress");
+const { configureAllureAdapterPlugins } = require('@mmisty/cypress-allure-adapter/plugins');
 
 module.exports = defineConfig({
   e2e: {
@@ -6,10 +7,15 @@ module.exports = defineConfig({
     viewportWidth: 1920,
     viewportHeight: 1080,
     screenshotOnRunFailure: false,
-    experimentalRunAllSpecs: true,
+    experimentalRunAllSpecs: true,    
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      configureAllureAdapterPlugins(on, config);
+
+      return config;
     },
     projectId: "jmfdv7",
   },
+  env: {
+    allure: true,
+  }
 });
